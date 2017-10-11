@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2017 at 05:08 PM
+-- Generation Time: Oct 11, 2017 at 06:47 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -132,6 +132,16 @@ CREATE TABLE `income_type` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `likeview`
+--
+CREATE TABLE `likeview` (
+`s_id` int(11)
+,`likes` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `solution`
 --
 
@@ -253,6 +263,15 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`u_id`, `userName`, `password`, `fullName`, `address`, `phone`, `email`, `age`, `date_created`, `role`) VALUES
 (1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Nguy?n Admin', 'QN', '0976679753', 'adcm.edu@gmail', '1994-01-05 00:00:00', '2017-10-08 00:00:00', 0),
 (2, 'user01', 'aad415a73c4cef1ef94a5c00b2642b571a3e5494536328ad960db61889bd9368', 'Nguyễn Khắc Ẩn', NULL, NULL, NULL, NULL, NULL, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `likeview`
+--
+DROP TABLE IF EXISTS `likeview`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `likeview`  AS  select `solution_like`.`s_id` AS `s_id`,count(`solution_like`.`u_id`) AS `likes` from `solution_like` group by `solution_like`.`s_id` ;
 
 --
 -- Indexes for dumped tables
